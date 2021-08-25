@@ -6,10 +6,10 @@ export class File {
     name: string;
 
     @Prop()
-    size: String;
+    size: Number;
 
     @Prop()
-    date: String;
+    date: Date;
 }
 
 export const FileSchema = SchemaFactory.createForClass(File);

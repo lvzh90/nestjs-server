@@ -14,4 +14,24 @@ export class FileService {
         const file = new this.fileModel(fileDto);
         return await file.save();
     }
+
+    async getFiles(): Promise<FileDocument[]> {
+        const files = await this.fileModel.find();
+        return files;
+    }
+
+    async getFile(fileId: string): Promise<FileDocument> {
+        const file = await this.fileModel.findById(fileId);
+        return file;
+    }
+
+    async deleteFile(fileId: string): Promise<FileDocument> {
+       return await this.fileModel.findByIdAndDelete(fileId);
+    }
+
+    async updateFile(fileId: string, fileDto: FileDto): Promise<FileDocument> {
+        const updateFile = this.fileModel.findByIdAndUpdate(fileId, fileDto, {new: true});
+        return updateFile;
+    }
+    
 }
