@@ -7,31 +7,30 @@ import { File } from './schema/file.schema';
 
 @Injectable()
 export class FileService {
+  constructor(
+    @InjectModel(File.name) private readonly fileModel: Model<FileDocument>,
+  ) {}
 
-    constructor( @InjectModel(File.name) private readonly fileModel: Model<FileDocument>) {}
+  uploadFile(fileDto: FileDto) {
+    return new this.fileModel(fileDto).save();
+  }
 
-    async uploadFile(fileDto: FileDto) {
-        const file = new this.fileModel(fileDto);
-        return await file.save();
-    }
+  getFiles() {
+    return this.fileModel.find();
+  }
 
-    async getFiles(): Promise<FileDocument[]> {
-        const files = await this.fileModel.find();
-        return files;
-    }
+  getFile(fileId: string) {
+    return this.fileModel.findById(fileId);
+  }
 
-    async getFile(fileId: string): Promise<FileDocument> {
-        const file = await this.fileModel.findById(fileId);
-        return file;
-    }
+  deleteFile(fileId: string) {
+    return this.fileModel.findByIdAndDelete(fileId);
+  }
 
-    async deleteFile(fileId: string): Promise<FileDocument> {
-       return await this.fileModel.findByIdAndDelete(fileId);
-    }
-
-    async updateFile(fileId: string, fileDto: FileDto): Promise<FileDocument> {
-        const updateFile = this.fileModel.findByIdAndUpdate(fileId, fileDto, {new: true});
-        return updateFile;
-    }
-    
+  async updateFile(fileId: string, fileDto: FileDto): Promise<FileDocument> {
+    const updateFile = this.fileModel.findByIdAndUpdate(fileId, fileDto, {
+      new: true,
+    });
+    return updateFile;
+  }
 }

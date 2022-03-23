@@ -7,13 +7,11 @@ import { FileService } from './file.service';
 import { EventEmitterModule } from '@nestjs/event-emitter';
 
 @Module({
-    imports: [
-        MongooseModule.forFeature([
-            { name: File.name , schema: FileSchema }
-        ]),
-        EventEmitterModule.forRoot()
-    ],
-    controllers: [FileController],
-    providers: [FileService, FileListener],
+  imports: [
+    MongooseModule.forFeature([{ name: File.name, schema: FileSchema }]),
+    EventEmitterModule.forRoot(),
+  ],
+  controllers: [FileController],
+  providers: [FileService, FileListener],
 })
 export class FileModule {}

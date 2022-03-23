@@ -5,10 +5,7 @@ import { AppService } from './app.service';
 import { FileModule } from './file/file.module';
 
 @Module({
-  imports: [
-    MongooseModule.forRoot('mongodb://localhost/files'),
-    FileModule
-  ],
+  imports: [MongooseModule.forRoot('mongodb://localhost/files'), FileModule],
   controllers: [AppController],
   providers: [AppService],
 })

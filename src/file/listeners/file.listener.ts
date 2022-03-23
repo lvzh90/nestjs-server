@@ -4,10 +4,8 @@ import { FileDto } from '../dto/file.dto';
 
 @Injectable()
 export class FileListener {
-
   @OnEvent('edit.file')
-  handleEditEvent( event: FileDto ) {
+  handleEditEvent(event: FileDto) {
     console.log(event);
   }
-
 }
